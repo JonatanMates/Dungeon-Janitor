@@ -6,8 +6,8 @@ public class PlayerController: MonoBehaviour {
 
     public float moveSpeed;
 
-    private Animator anim;
     private Rigidbody2D myRigidbody;
+    private Animator anim;
 
     private bool playerMoving;
     private Vector2 lastMove;
