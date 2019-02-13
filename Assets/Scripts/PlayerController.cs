@@ -12,6 +12,11 @@ public class PlayerController: MonoBehaviour {
     private bool playerMoving;
     private Vector2 lastMove;
 
+    private bool attacking; //is the player attacking?
+    public float attackTime; //how long does the player attack for
+    private float attackTimeCounter; //counter till the next attack
+
+
 
     // Use this for initialization
     void Start() {
@@ -23,38 +28,63 @@ public class PlayerController: MonoBehaviour {
     void Update() {
 
         playerMoving = false;
-        //pohyb doleva a doprava
-        if (Input.GetAxisRaw("Horizontal") > 0.5f || Input.GetAxisRaw("Horizontal") < -0.5f)
-        {
-            myRigidbody.velocity = new Vector2(Input.GetAxisRaw("Horizontal") * moveSpeed, myRigidbody.velocity.y);
-            playerMoving = true;
-            lastMove = new Vector2(Input.GetAxisRaw("Horizontal") * moveSpeed, 0f);
-        }
-        //zastaveni na miste
-        else 
-        {
-            myRigidbody.velocity = new Vector2(0f, myRigidbody.velocity.y);
-        }
-        //pohyb nahoru a dolu
-        if (Input.GetAxisRaw("Vertical") > 0.5f || Input.GetAxisRaw("Vertical") < -0.5f)
-        {
-            myRigidbody.velocity = new Vector2(myRigidbody.velocity.x, Input.GetAxisRaw("Vertical") * moveSpeed);
-            playerMoving = true;
-            lastMove = new Vector2(0f, Input.GetAxisRaw("Vertical") * moveSpeed);
-        }
-        //zastaveni na miste
-        else
-        {
-           myRigidbody.velocity = new Vector2(myRigidbody.velocity.x, 0f);
-        }
-       
 
-        //nastaveni animaci, aby kdyz se player zastavi, tak aby divali smerem kudy sel  
-        anim.SetFloat("MoveX", Input.GetAxisRaw("Horizontal"));
-        anim.SetFloat("MoveY", Input.GetAxisRaw("Vertical"));
-        anim.SetBool("PlayerMoving", playerMoving);
-        anim.SetFloat("LastMoveX", lastMove.x);
-        anim.SetFloat("LastMoveY", lastMove.y);
+        if (!attacking)
+        {
+            //pohyb doleva a doprava
+            if (Input.GetAxisRaw("Horizontal") > 0.5f || Input.GetAxisRaw("Horizontal") < -0.5f)
+            {
+                myRigidbody.velocity = new Vector2(Input.GetAxisRaw("Horizontal") * moveSpeed, myRigidbody.velocity.y);
+                playerMoving = true;
+                lastMove = new Vector2(Input.GetAxisRaw("Horizontal") * moveSpeed, 0f);
+            }
+            //zastaveni na miste
+            else
+            {
+                myRigidbody.velocity = new Vector2(0f, myRigidbody.velocity.y);
+            }
+            //pohyb nahoru a dolu
+            if (Input.GetAxisRaw("Vertical") > 0.5f || Input.GetAxisRaw("Vertical") < -0.5f)
+            {
+                myRigidbody.velocity = new Vector2(myRigidbody.velocity.x, Input.GetAxisRaw("Vertical") * moveSpeed);
+                playerMoving = true;
+                lastMove = new Vector2(0f, Input.GetAxisRaw("Vertical") * moveSpeed);
+            }
+            //zastaveni na miste
+            else
+            {
+                myRigidbody.velocity = new Vector2(myRigidbody.velocity.x, 0f);
+            }
+
+            //detecting attacks
+
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                attackTimeCounter = attackTime;
+                attacking = true;
+                myRigidbody.velocity = Vector2.zero;
+                anim.SetBool("Attack", true);
+            }
+
+        }
+
+        if(attackTimeCounter >= 0)
+        {
+            attackTimeCounter -= Time.deltaTime;
+        }
+
+        if(attackTimeCounter <= 0)
+        {
+            attacking = false;
+            anim.SetBool("Attack", false);
+        }
+
+     //nastaveni animaci, aby kdyz se player zastavi, tak aby divali smerem kudy sel  
+     anim.SetFloat("MoveX", Input.GetAxisRaw("Horizontal"));
+     anim.SetFloat("MoveY", Input.GetAxisRaw("Vertical"));
+     anim.SetBool("PlayerMoving", playerMoving);
+     anim.SetFloat("LastMoveX", lastMove.x);
+     anim.SetFloat("LastMoveY", lastMove.y);    
     }
 }
 
