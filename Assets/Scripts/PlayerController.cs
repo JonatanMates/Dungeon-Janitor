@@ -5,6 +5,8 @@ using UnityEngine;
 public class PlayerController: MonoBehaviour {
 
     public float moveSpeed;
+    private float currentMoveSpeed;
+    public float diagonalModifier;
 
     private Rigidbody2D myRigidbody;
     private Animator anim;
@@ -14,7 +16,7 @@ public class PlayerController: MonoBehaviour {
 
     private bool attacking; //is the player attacking?
     public float attackTime; //how long does the player attack for
-    private float attackTimeCounter; //counter till the next attack
+    public float attackTimeCounter; //counter till the next attack
 
 
 
@@ -34,7 +36,7 @@ public class PlayerController: MonoBehaviour {
             //pohyb doleva a doprava
             if (Input.GetAxisRaw("Horizontal") > 0.5f || Input.GetAxisRaw("Horizontal") < -0.5f)
             {
-                myRigidbody.velocity = new Vector2(Input.GetAxisRaw("Horizontal") * moveSpeed, myRigidbody.velocity.y);
+                myRigidbody.velocity = new Vector2(Input.GetAxisRaw("Horizontal") * currentMoveSpeed, myRigidbody.velocity.y);
                 playerMoving = true;
                 lastMove = new Vector2(Input.GetAxisRaw("Horizontal") * moveSpeed, 0f);
             }
@@ -46,7 +48,7 @@ public class PlayerController: MonoBehaviour {
             //pohyb nahoru a dolu
             if (Input.GetAxisRaw("Vertical") > 0.5f || Input.GetAxisRaw("Vertical") < -0.5f)
             {
-                myRigidbody.velocity = new Vector2(myRigidbody.velocity.x, Input.GetAxisRaw("Vertical") * moveSpeed);
+                myRigidbody.velocity = new Vector2(myRigidbody.velocity.x, Input.GetAxisRaw("Vertical") * currentMoveSpeed);
                 playerMoving = true;
                 lastMove = new Vector2(0f, Input.GetAxisRaw("Vertical") * moveSpeed);
             }
@@ -66,7 +68,17 @@ public class PlayerController: MonoBehaviour {
                 anim.SetBool("Attack", true);
             }
 
+            if (Mathf.Abs (Input.GetAxisRaw("Horizontal")) > 0.5f && Mathf.Abs (Input.GetAxisRaw("Vertical")) > 0.5f)
+            {
+                currentMoveSpeed = moveSpeed * diagonalModifier; //sets the movespeed to be same when diagnol
+            } else
+            {
+                currentMoveSpeed = moveSpeed;
+            }
+
+
         }
+        
 
         if(attackTimeCounter >= 0)
         {
