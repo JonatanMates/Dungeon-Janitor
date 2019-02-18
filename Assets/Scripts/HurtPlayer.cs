@@ -6,7 +6,7 @@ public class HurtPlayer : MonoBehaviour
 {
 
     public int damageToGive;
-
+    public GameObject damageNumber;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,6 +24,9 @@ public class HurtPlayer : MonoBehaviour
         if (other.gameObject.name == "Player")
         {
             other.gameObject.GetComponent<PlayerHealthManager>().HurtPlayer(damageToGive);
+
+            var clone = Instantiate(damageNumber, other.transform.position, Quaternion.Euler(Vector3.zero));
+            clone.GetComponent<FloatingNumbers>().damageNumber = damageToGive;
         }
     }
 

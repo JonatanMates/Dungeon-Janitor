@@ -18,13 +18,14 @@ public class PlayerController: MonoBehaviour {
     public float attackTime; //how long does the player attack for
     public float attackTimeCounter; //counter till the next attack
 
-
-
+    
     // Use this for initialization
     void Start() {
         anim = GetComponent<Animator>();
         myRigidbody = GetComponent<Rigidbody2D>();
-	}
+
+        
+    }
 
     // Update is called once per frame
     void Update() {

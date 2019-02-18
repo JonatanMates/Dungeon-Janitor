@@ -7,9 +7,9 @@ using UnityEngine.UI;
     public class HPBar : MonoBehaviour
     { 
     
-    public Slider someHealthBars;
-    public Text healthSMS;
-    public PlayerHealthManager mitochondria;
+    public Slider healthBars;
+    public Text healthText;
+    public PlayerHealthManager playerManager;
 
     private static bool UIExists;
 
@@ -30,8 +30,8 @@ using UnityEngine.UI;
     // Update is called once per frame
     void Update()
     {
-        someHealthBars.maxValue = mitochondria.playerMaxHealth; //thats a lot of health
-        someHealthBars.value = mitochondria.playerCurrentHealth; //thats no health
-        healthSMS.text = "HP: " + mitochondria.playerCurrentHealth + "/" + mitochondria.playerMaxHealth;
+        healthBars.maxValue = playerManager.playerMaxHealth; //thats a lot of health
+        healthBars.value = playerManager.playerCurrentHealth; //thats no health
+        healthText.text = "HP: " + playerManager.playerCurrentHealth + "/" + playerManager.playerMaxHealth;
     }
 }

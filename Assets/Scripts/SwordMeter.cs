@@ -9,13 +9,14 @@ public class SwordMeter : MonoBehaviour
     public Slider swordBar;
     public Text swordText;
     public PlayerController swordTime;
+    public static PlayerHealthManager playerManage;
 
     private static bool UIExists;
 
     // Start is called before the first frame update
     void Start()
     {
-        if (!UIExists)
+        if (!UIExists) //sets it to be syncronized when moving scene to scene
         {
             UIExists = true;
             DontDestroyOnLoad(transform.gameObject);
@@ -29,7 +30,12 @@ public class SwordMeter : MonoBehaviour
     void Update()
     {
          swordBar.maxValue = swordTime.attackTime; //sets the slider to hold the attack time
-         swordBar.value = swordTime.attackTimeCounter; //hold countdown to next attack                                                              
+         swordBar.value = swordTime.attackTimeCounter; //hold countdown to next attack 
+
+        //if (playerManage.reloading == true)
+        {
+            
+        }
     }
     
 }

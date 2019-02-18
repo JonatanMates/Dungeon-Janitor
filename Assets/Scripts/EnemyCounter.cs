@@ -14,7 +14,7 @@ public class EnemyCounter : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (!UIExists)
+        /*if (!UIExists)
         {
             UIExists = true;
             DontDestroyOnLoad(transform.gameObject);
@@ -22,7 +22,7 @@ public class EnemyCounter : MonoBehaviour
         else
         {
             Destroy(gameObject);
-        }
+        }*/
     }
 
     // Update is called once per frame
