@@ -30,14 +30,10 @@ public class PlayerHealthManager : MonoBehaviour {
     {
         if(playerCurrentHealth <= 0) //manages death and reloading
         {
-            gameObject.SetActive(false);
-            reloading = true;
-            // waitToReload -= Time.deltaTime;
-                //if (waitToReload <= 0f)
-                //{
-                    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); //reloading the current level
-                    gameObject.SetActive(true);
-                //}
+            //gameObject.SetActive(false);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); //reloading the current level
+            //gameObject.SetActive(true);
+
         }
 
         if (flashActive) //manages damage flashing

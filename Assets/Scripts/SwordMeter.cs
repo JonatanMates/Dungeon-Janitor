@@ -9,7 +9,7 @@ public class SwordMeter : MonoBehaviour
     public Slider swordBar;
     public Text swordText;
     public PlayerController swordTime;
-    public static PlayerHealthManager playerManage;
+    //public PlayerHealthManager playerManage;
 
     private static bool UIExists;
 

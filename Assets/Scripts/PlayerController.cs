@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class PlayerController: MonoBehaviour {
 
     public float moveSpeed;
@@ -17,6 +18,9 @@ public class PlayerController: MonoBehaviour {
     private bool attacking; //is the player attacking?
     public float attackTime; //how long does the player attack for
     public float attackTimeCounter; //counter till the next attack
+
+
+
 
     
     // Use this for initialization
