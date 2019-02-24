@@ -10,7 +10,7 @@ public class Projectile : MonoBehaviour
     private Transform player;
     private Vector2 target;
 
-    public HurtPlayer damage;
+    
     
     // Start is called before the first frame update
     void Start()
@@ -35,8 +35,10 @@ public class Projectile : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-
             DestroyProjectile();
+        } else 
+        {
+            Destroy(gameObject, 5);
         }
     }
 
@@ -44,12 +46,4 @@ public class Projectile : MonoBehaviour
     {
         Destroy(gameObject);
     }
-
-    /*void OnCollisionEnter2D(Collision2D other)
-    {
-        if (other.gameObject.name == "Player")
-        {
-            GetComponent<HurtPlayer>();
-        }
-    }*/
 }
